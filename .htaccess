@@ -2,23 +2,22 @@ php_value display_errors On
 php_value mbstring.http_input auto
 php_value date.timezone America/Guayaquil
 
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
 
-RewriteEngine on
+<Files ~ "^.*\.php">
+  deny from all
+</Files>
 
-RewriteRule ^usuarios$ /Controllers/UserController.php
-RewriteRule ^usuarios/([A-Za-z\d[:punct:]]+)$ /Controllers/UserController.php?email=$1
+<Files ~ "^index\.php|css|js|.*\.png|.*\.jpg|.*\.gif">
+  Allow from all
+</Files>
 
-RewriteRule ^login$ /Controllers/LoginController.php
-
-RewriteRule ^correos$ /Controllers/MailController.php
-RewriteRule ^correos/([A-Za-z\d]+)$ /Controllers/MailController.php?id=$1
-RewriteRule ^correos/eliminar/([A-Za-z\d]+)$ /Controllers/MailController.php?id=$1&e=1
-
-RewriteRule ^correos/(recibidos|enviados)/([A-Za-z\d[:punct:]]+)$ /Controllers/MailController.php?solicitud=$1&email=$2
-
-RewriteRule ^desencriptar/([A-Za-z\d]+)$ /Controllers/DecryptController.php?id=$1
-RewriteRule ^revisar/([A-Za-z\d]+)$ /Controllers/DecryptController.php?id=$1&revisar=1
-
-RewriteRule ^download/([A-Za-z\d[:punct:][:space:]]+)$ /Uploads/$1
-
-RewriteRule ^tattoos$ /Controllers/TattoosController.php
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
