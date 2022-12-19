@@ -1,5 +1,10 @@
 <?php
 
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+header("Access-Control-Allow-Headers: X-Requested-With, X-Custom-Header, Authorization");
+
 // $headers = getallheaders();
 
 // if(isset($headers["Authorization"])){
@@ -19,8 +24,11 @@
 //     exit();
 // }
 
+include './bs/ResponseServices.php';
+
 include './controllers/TattoosController.php';
 include './controllers/FilesController.php';
+include './controllers/AppController.php';
 //include './controllers/LoginController.php';
 
 $rutas = [ 
@@ -30,8 +38,11 @@ $rutas = [
     '/catalogue' => ['TattoosController', 'getCatalogue'],
     '/promotions' => ['TattoosController', 'getPromotions'],
     '/works' => ['TattoosController', 'getWorks'],
+    '/categories' => ['TattoosController', 'getCategories'],
 
     '/login' => ['LoginController', 'login'],
+
+    '/settings' => ['AppController', 'getAllSettings'],
 ];
 
 try {
@@ -45,15 +56,13 @@ try {
 
         $controllerInstance = new $controllerName();
 
-        $controllerInstance->{$functionName}();
+        echo ( $controllerInstance -> { $functionName }() );
 
     } else {
         
         header("HTTP/1.1 404 Not found");
 
         include './http_codes/404.php';
-
-        exit();
 
     }
 
@@ -63,6 +72,8 @@ try {
 
     echo("Server error: ".$e);
 
-    exit();
+    
     
 }
+
+exit();

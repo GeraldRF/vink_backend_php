@@ -1,6 +1,6 @@
 <?php
 
-class TattoosServices {
+class AppServices {
 
     public $dbConn;
 
@@ -19,19 +19,8 @@ class TattoosServices {
         );
     } 
 
-    function all(){
-        $sql = $this->dbConn->prepare("SELECT * FROM tattoos");
-
-        $sql->execute();
-
-        $sql->setFetchMode(PDO::FETCH_ASSOC);
-
-        return $sql->fetchAll();
-    }
-
-    function categories () {
-
-        $sql = $this->dbConn->prepare("SELECT * FROM categories");
+    function settings(){
+        $sql = $this->dbConn->prepare("SELECT * FROM settings");
 
         $sql->execute();
 

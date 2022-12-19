@@ -27,7 +27,7 @@ class UserServices
 
         $sql->setFetchMode(PDO::FETCH_ASSOC);
 
-        return  $sql->fetchAll();;
+        return  $sql->fetchAll();
     }
 
     function findUser($email)
