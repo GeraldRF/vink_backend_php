@@ -7,8 +7,8 @@ php_value date.timezone America/Guayaquil
   deny from all
 </Files>
 
-<Files ~ "^.*\.php">
-  deny from all
+<Files ~ "^.*\.php|.example">
+  Deny from all
 </Files>
 
 <Files ~ "^index\.php|css|js|.*\.png|.*\.jpg|.*\.gif">

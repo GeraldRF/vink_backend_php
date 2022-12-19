@@ -51,14 +51,18 @@ try {
         
         header("HTTP/1.1 404 Not found");
 
-        echo("Sorry, we couldn't find this URL");
+        include './http_codes/404.php';
 
         exit();
+
     }
 
 } catch(Exception $e){
  
+    header("HTTP/1.1 500 Server error");
+
     echo("Server error: ".$e);
+
     exit();
     
 }
